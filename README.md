@@ -1,4 +1,4 @@
-# ✨ Minimalist Luxury Birthday Web Experience
+# ✨ Minimalist Luxury 
 
 A clean, modern, and mobile-friendly screen-to-screen birthday web app designed with smooth micro-animations, interactive elements, and progressive audio streaming.
 
