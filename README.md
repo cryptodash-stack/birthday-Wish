@@ -17,19 +17,6 @@
 - **🎵 Progressive Audio Streaming**: Streams `birthday_song.mp3` with animated sound wave equalizer and tap-to-unlock audio.
 - **⚡ Lightweight (0ms Freeze)**: Pure HTML, Vanilla CSS, and JavaScript (~58 KB). Zero npm install, no bundlers, no heavy frameworks.
 
----
-
-## 🚀 How to Enable GitHub Pages (Free Hosting)
-
-1. Open **[GitHub Repository Settings](https://github.com/cryptodash-stack/birthday-Wish/settings/pages)**.
-2. In the left sidebar, click **Pages**.
-3. Under **Build and deployment**:
-   - **Source**: Deploy from a branch
-   - **Branch**: `main`
-   - **Folder**: `/ (root)`
-4. Click **Save**.
-5. Within 30–60 seconds, your site will be live at:  
-   👉 **[https://cryptodash-stack.github.io/birthday-Wish/](https://cryptodash-stack.github.io/birthday-Wish/)**
 
 ---
 
