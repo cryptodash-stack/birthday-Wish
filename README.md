@@ -1,48 +1,35 @@
-# ✨ Minimalist Luxury 
+# ✨ Minimalist Luxury Birthday Experience
 
-A clean, modern, and mobile-friendly screen-to-screen birthday web app designed with smooth micro-animations, interactive elements, and progressive audio streaming.
+> A clean, modern, mobile-friendly screen-to-screen birthday web application designed with fluid animations, accurate candle physics, and progressive audio streaming.
 
-Built for **Ambivert** from **Usman**, and structured so anyone can easily fork, customize, and deploy their own version in 60 seconds on GitHub Pages!
+**🔗 Live Website:** [https://cryptodash-stack.github.io/birthday-Wish/](https://cryptodash-stack.github.io/birthday-Wish/)  
+**📦 Repository:** [https://github.com/cryptodash-stack/birthday-Wish](https://github.com/cryptodash-stack/birthday-Wish)
 
 ---
 
-## 🌟 Features
+## 🌟 Highlights
 
 - **📱 Mobile-First Responsive**: Designed to look and feel like a high-end native mobile app on phones, while gracefully centered on desktop screens.
 - **⏭️ Screen-to-Screen Navigation (No Scroll Triggers)**: 7 structured, focused chapters with smooth transitions, progress stepper indicators, and back navigation.
 - **🕯️ Interactive Candle & Wish Ceremony**: Minimalist candle with realistic flame flicker; tap to blow out the flame with curling smoke and stardust particles.
-- **💌 Wax-Sealed Letter**: An elegant envelope with a wax seal that unlocks a heartfelt, handwritten note.
+- **💌 Wax-Sealed Letter**: An elegant envelope with a wax seal that unlocks a heartfelt, handwritten note from Usman to Ambivert.
 - **✦ Starry Wish Generator**: Interactive blessing generator revealing curated wishes for the year ahead.
-- **🎵 Seamless Audio Streaming**: Streams `birthday_song.mp3` with animated sound wave equalizer and tap-to-unlock audio.
-- **⚡ Zero Build Tools / Lightweight**: Pure HTML, Vanilla CSS, and JavaScript. No npm install, no bundlers, no heavy frameworks.
+- **🎵 Progressive Audio Streaming**: Streams `birthday_song.mp3` with animated sound wave equalizer and tap-to-unlock audio.
+- **⚡ Lightweight (0ms Freeze)**: Pure HTML, Vanilla CSS, and JavaScript (~58 KB). Zero npm install, no bundlers, no heavy frameworks.
 
 ---
 
-## 🚀 Instant Deployment (GitHub Pages)
+## 🚀 How to Enable GitHub Pages (Free Hosting)
 
-You can host this for free in less than 2 minutes:
-
-1. **Fork or Clone this repository**:
-   ```bash
-   git clone https://github.com/<your-username>/<repo-name>.git
-   cd <repo-name>
-   ```
-
-2. **Customize details in `index.html`** (see guide below).
-
-3. **Push to your GitHub repository**:
-   ```bash
-   git add .
-   git commit -m "feat: personalized birthday site"
-   git push origin main
-   ```
-
-4. **Enable GitHub Pages**:
-   - Go to your repository on GitHub.
-   - Click **Settings** → **Pages** (in the left sidebar).
-   - Under **Build and deployment** > **Branch**, select `main` and `/ (root)`.
-   - Click **Save**.
-   - Your live link will be ready at: `https://<your-username>.github.io/<repo-name>/`!
+1. Open **[GitHub Repository Settings](https://github.com/cryptodash-stack/birthday-Wish/settings/pages)**.
+2. In the left sidebar, click **Pages**.
+3. Under **Build and deployment**:
+   - **Source**: Deploy from a branch
+   - **Branch**: `main`
+   - **Folder**: `/ (root)`
+4. Click **Save**.
+5. Within 30–60 seconds, your site will be live at:  
+   👉 **[https://cryptodash-stack.github.io/birthday-Wish/](https://cryptodash-stack.github.io/birthday-Wish/)**
 
 ---
 
@@ -57,7 +44,7 @@ Open `index.html` and use find & replace:
 - Replace the monogram initial `A` in the seal (search for `<div class="orb-initials">A</div>`).
 
 ### 2. Change the Song
-Simply replace `birthday_song.mp3` with your own `.mp3` file (keep the name `birthday_song.mp3`, or change the filename inside `<audio id="bday-audio">` in `index.html`).
+Replace `birthday_song.mp3` with your own `.mp3` file (keep the name `birthday_song.mp3`, or update the filename inside `<audio id="bday-audio">` in `index.html`).
 
 ### 3. Personalize the Letter
 Scroll to Screen 5 (`#screen-5`) inside `index.html` and edit the paragraphs inside `<div class="letter-parchment">` to write your own personalized message.
