@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Happy Birthday, Ambivert ✨ From Usman</title>
+  <meta name="description" content="A clean, elegant, and interactive birthday experience for Ambivert with love from Usman.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0a0812;
+      --bg-card: rgba(23, 19, 36, 0.72);
+      --bg-card-hover: rgba(32, 26, 51, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(255, 182, 193, 0.35);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-rose: #ff758f;
+      --accent-gold: #fbbf24;
+      --accent-violet: #a855f7;
+      --accent-glow: rgba(255, 117, 143, 0.25);
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Outfit', sans-serif;
+      --font-hand: 'Caveat', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Ambient Background Mesh */
+    .ambient-canvas-wrapper {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .ambient-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+      animation: drift-ambient 18s infinite alternate ease-in-out;
+    }
+    .glow-1 {
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, #701a75, transparent 70%);
+      top: -100px;
+      left: -80px;
+    }
+    .glow-2 {
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, #312e81, transparent 70%);
+      bottom: -120px;
+      right: -100px;
+      animation-duration: 22s;
+    }
+    .glow-3 {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, #9d174d, transparent 70%);
+      top: 40%;
+      right: 15%;
+      opacity: 0.2;
+      animation-duration: 16s;
+    }
+
+    @keyframes drift-ambient {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(35px, -25px) scale(1.12); }
+      100% { transform: translate(-30px, 30px) scale(0.92); }
+    }
+
+    /* Particle Canvas for Stardust / Sparkles */
+    #stardust-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    /* Mobile Viewport Container */
+    .app-viewport {
+      width: 100%;
+      max-width: 420px;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background: rgba(15, 12, 24, 0.65);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      overflow: hidden;
+      z-index: 10;
+      box-shadow: 0 0 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    @media (min-width: 480px) {
+      .app-viewport {
+        height: 840px;
+        max-height: 92vh;
+        border-radius: 36px;
+      }
+    }
+
+    /* Top Navigation Bar */
+    .nav-bar {
+      padding: 16px 20px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 50;
+    }
+
+    .btn-nav-back {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all 0.25s ease;
+    }
+    .btn-nav-back:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+    }
+    .btn-nav-back.hidden {
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Progress Indicators */
+    .stepper-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+    }
+    .step-pill {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .step-pill.active {
+      width: 18px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--accent-rose), var(--accent-violet));
+      box-shadow: 0 0 12px var(--accent-rose);
+    }
+    .step-pill.passed {
+      background: rgba(255, 117, 143, 0.5);
+    }
+
+    /* Audio Equalizer Widget */
+    .audio-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .audio-pill:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .audio-bars {
+      display: flex;
+      align-items: center;
+      gap: 2.5px;
+      height: 12px;
+    }
+    .audio-bar {
+      width: 2px;
+      height: 4px;
+      background: var(--accent-rose);
+      border-radius: 1px;
+      transition: height 0.2s ease;
+    }
+    .audio-pill.playing .audio-bar:nth-child(1) { animation: sound-bounce 0.8s infinite ease-in-out; }
+    .audio-pill.playing .audio-bar:nth-child(2) { animation: sound-bounce 1.1s infinite ease-in-out 0.2s; }
+    .audio-pill.playing .audio-bar:nth-child(3) { animation: sound-bounce 0.9s infinite ease-in-out 0.4s; }
+    .audio-pill.playing .audio-bar:nth-child(4) { animation: sound-bounce 1.2s infinite ease-in-out 0.1s; }
+
+    @keyframes sound-bounce {
+      0%, 100% { height: 3px; }
+      50% { height: 13px; }
+    }
+
+    .audio-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+    }
+
+    /* Screens Container */
+    .screens-viewport {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    /* Individual Screen */
+    .screen {
+      position: absolute;
+      inset: 0;
+      padding: 12px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.96) translateY(20px);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .screen::-webkit-scrollbar { display: none; }
+
+    .screen.active {
+      opacity: 1;
+      pointer-events: all;
+      transform: scale(1) translateY(0);
+      z-index: 10;
+    }
+    .screen.prev {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.02) translateY(-15px);
+    }
+
+    /* Clean Modern Typography */
+    .meta-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-rose);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .meta-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-rose);
+      box-shadow: 0 0 8px var(--accent-rose);
+    }
+
+    .headline-lg {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, #ffb3c1 70%, #d8b4fe 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sub-copy {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 320px;
+      margin: 0 auto 10px;
+      font-weight: 400;
+    }
+
+    /* Clean Buttons */
+    .btn-clean-primary {
+      width: 100%;
+      max-width: 320px;
+      padding: 16px 24px;
+      border-radius: 20px;
+      font-family: var(--font-main);
+      font-size: 14.5px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #ff6384, #be185d);
+      color: #ffffff;
+      box-shadow: 0 10px 30px rgba(190, 24, 93, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-clean-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .btn-clean-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 35px rgba(190, 24, 93, 0.45);
+    }
+    .btn-clean-primary:hover::before {
+      transform: translateX(100%);
+    }
+    .btn-clean-primary:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    /* ===================================================
+       SCREEN 1: CLEAN MONOGRAM ORB & INVITATION
+       =================================================== */
+    .hero-center-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+    }
+
+    .monogram-orb {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(255, 117, 143, 0.2), rgba(15, 12, 24, 0.9));
+      border: 1px solid rgba(255, 117, 143, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 0 40px rgba(255, 117, 143, 0.2), inset 0 0 20px rgba(255, 117, 143, 0.1);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-bottom: 24px;
+    }
+    .monogram-orb:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 60px rgba(255, 117, 143, 0.35);
+      border-color: rgba(255, 117, 143, 0.7);
+    }
+    .orb-ring {
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255, 117, 143, 0.3);
+      animation: rotate-ring 14s linear infinite;
+    }
+    @keyframes rotate-ring {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .orb-initials {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #ffffff, #ffb3c1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    /* ===================================================
+       SCREEN 2: STAGGERED ELEVATED BIRTHDAY GREETING
+       =================================================== */
+    .celebration-card-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .clean-glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 26px 22px;
+      width: 100%;
+      max-width: 330px;
+      position: relative;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+
+    .quote-mark {
+      font-family: var(--font-display);
+      font-size: 44px;
+      line-height: 1;
+      color: var(--accent-rose);
+      opacity: 0.5;
+      margin-bottom: 8px;
+    }
+
+    .card-body-text {
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: #e2e8f0;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+
+    .card-divider {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-rose), transparent);
+      margin: 0 auto 14px;
+    }
+
+    .card-signature {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* ===================================================
+       SCREEN 3: MINIMALIST ACCURATE CANDLE CAKE
+       =================================================== */
+    .candle-experience-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+    }
+
+    .candle-pedestal {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Flame Glow & Realistic Flame */
+    .candle-flame-wrapper {
+      position: absolute;
+      top: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .flame-aura {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(251, 191, 36, 0.45), rgba(244, 63, 94, 0.15), transparent 70%);
+      filter: blur(8px);
+      animation: pulse-aura 2s infinite ease-in-out alternate;
+    }
+    @keyframes pulse-aura {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      100% { transform: scale(1.2); opacity: 0.9; }
+    }
+
+    .flame-core {
+      width: 14px;
+      height: 28px;
+      background: linear-gradient(180deg, #ffffff 10%, #fbbf24 45%, #ef4444 85%);
+      border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+      animation: flicker 1.4s infinite ease-in-out alternate;
+      box-shadow: 0 0 16px rgba(251, 191, 36, 0.7);
+      transform-origin: center bottom;
+    }
+    @keyframes flicker {
+      0% { transform: rotate(-2deg) scale(1, 1); }
+      50% { transform: rotate(2deg) scale(1.05, 1.08); }
+      100% { transform: rotate(-1deg) scale(0.96, 0.96); }
+    }
+
+    /* Extinguished State */
+    .candle-pedestal.blown .candle-flame-wrapper {
+      opacity: 0;
+      transform: translateX(-50%) scale(0);
+      pointer-events: none;
+    }
+
+    .smoke-trail {
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 50px;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .candle-pedestal.blown .smoke-trail {
+      opacity: 1;
+      animation: smoke-rise 2.8s ease-out forwards;
+    }
+    @keyframes smoke-rise {
+      0% { opacity: 0.8; transform: translateX(-50%) translateY(0) scale(0.8); }
+      50% { opacity: 0.5; transform: translateX(-40%) translateY(-25px) scale(1.2); }
+      100% { opacity: 0; transform: translateX(-60%) translateY(-50px) scale(1.6); }
+    }
+
+    .tap-to-blow-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      margin-top: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .wish-revealed-pill {
+      display: none;
+      padding: 12px 20px;
+      border-radius: 22px;
+      background: rgba(255, 117, 143, 0.12);
+      border: 1px solid rgba(255, 117, 143, 0.4);
+      color: #fce7f3;
+      font-size: 13.5px;
+      font-weight: 500;
+      text-align: center;
+      margin-top: 14px;
+      animation: fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .wish-revealed-pill.show {
+      display: block;
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===================================================
+       SCREEN 4: THE BESTIE PROFILE (CLEAN CARDS)
+       =================================================== */
+    .profile-cards-deck {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+    }
+
+    .traits-stack {
+      width: 100%;
+      max-width: 320px;
+      min-height: 220px;
+      position: relative;
+    }
+
+    .trait-glass-card {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      transform: translateY(18px) scale(0.95);
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    .trait-glass-card.current {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: all;
+      border-color: rgba(255, 117, 143, 0.3);
+    }
+
+    .card-num-tag {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--accent-rose);
+      margin-bottom: 8px;
+    }
+
+    .card-title-text {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .card-desc-text {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .traits-stepper-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 16px;
+    }
+    .traits-step-dot {
+      width: 18px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.15);
+      transition: all 0.3s ease;
+    }
+    .traits-step-dot.active {
+      background: var(--accent-rose);
+      width: 28px;
+    }
+
+    /* ===================================================
+       SCREEN 5: HEARTFELT LETTER (CLEAN ENVELOPE)
+       =================================================== */
+    .letter-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+    }
+
+    .clean-envelope-box {
+      width: 100%;
+      max-width: 320px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 30px 20px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .clean-envelope-box:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 117, 143, 0.4);
+    }
+
+    .wax-seal-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e11d48, #9f1239);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(225, 29, 72, 0.35);
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      transition: transform 0.3s ease;
+    }
+    .clean-envelope-box:hover .wax-seal-badge {
+      transform: scale(1.08);
+    }
+
+    /* Minimalist Letter Sheet Modal */
+    .clean-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 4, 12, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 100;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+      animation: overlay-fade 0.3s ease forwards;
+    }
+    .clean-modal-overlay.show {
+      display: flex;
+    }
+    @keyframes overlay-fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .letter-parchment {
+      background: #fdfbf7;
+      color: #1e1b2e;
+      width: 100%;
+      max-width: 350px;
+      max-height: 82vh;
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      animation: parchment-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes parchment-in {
+      from { opacity: 0; transform: scale(0.92) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .btn-close-parchment {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f1ede4;
+      border: none;
+      color: #57534e;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+    .btn-close-parchment:hover {
+      background: #e7e2d7;
+    }
+
+    .letter-greeting {
+      font-family: var(--font-hand);
+      font-size: 26px;
+      font-weight: 700;
+      color: #9f1239;
+      margin-bottom: 12px;
+    }
+
+    .letter-text {
+      font-family: var(--font-hand);
+      font-size: 20px;
+      line-height: 1.55;
+      color: #292524;
+      margin-bottom: 14px;
+      word-spacing: 1.5px;
+    }
+
+    .letter-sign {
+      font-family: var(--font-hand);
+      font-size: 22px;
+      font-weight: 700;
+      color: #9f1239;
+      text-align: right;
+      margin-top: 16px;
+    }
+
+    /* ===================================================
+       SCREEN 6: STARRY WISH CAPSULE
+       =================================================== */
+    .wishes-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .wish-oracle-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 26px 20px;
+      width: 100%;
+      max-width: 320px;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      position: relative;
+    }
+
+    .oracle-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      display: inline-block;
+      animation: float-soft 3s infinite ease-in-out;
+    }
+    @keyframes float-soft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .oracle-text-display {
+      font-size: 14.5px;
+      font-weight: 500;
+      line-height: 1.6;
+      color: #f1f5f9;
+      min-height: 65px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-draw-wish {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 10px 18px;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.2s ease;
+    }
+    .btn-draw-wish:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    .btn-draw-wish:active {
+      transform: scale(0.96);
+    }
+
+    /* ===================================================
+       SCREEN 7: GRAND CELEBRATION FINALE
+       =================================================== */
+    .finale-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      text-align: center;
+    }
+
+    .finale-monogram {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(251, 191, 36, 0.25), rgba(15, 12, 24, 0.9));
+      border: 1px solid rgba(251, 191, 36, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      box-shadow: 0 0 30px rgba(251, 191, 36, 0.2);
+      margin-bottom: 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .finale-monogram:hover {
+      transform: scale(1.08);
+    }
+
+    .finale-info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 20px;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      margin-bottom: 16px;
+    }
+
+    .actions-dual {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .btn-secondary-clean {
+      flex: 1;
+      padding: 13px 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-secondary-clean:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .btn-secondary-clean:active {
+      transform: scale(0.96);
+    }
+
+    /* Floating Stardust particle on tap */
+    .touch-sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 18px;
+      animation: float-dissolve 1.4s ease-out forwards;
+    }
+    @keyframes float-dissolve {
+      0% { transform: translate(0, 0) scale(0.6); opacity: 1; }
+      100% { transform: translate(var(--dx), -90px) scale(1.2); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Luxury Glow Backdrop -->
+  <div class="ambient-canvas-wrapper">
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+  </div>
+
+  <!-- Particle Stardust Canvas -->
+  <canvas id="stardust-canvas"></canvas>
+
+  <!-- Mobile Viewport Container -->
+  <div class="app-viewport" id="app-viewport">
+
+    <!-- Top Navigation Header -->
+    <header class="nav-bar">
+      <button class="btn-nav-back hidden" id="btn-back" aria-label="Previous screen">←</button>
+
+      <!-- Stepper Indicator -->
+      <div class="stepper-pills">
+        <div class="step-pill active" data-step="1"></div>
+        <div class="step-pill" data-step="2"></div>
+        <div class="step-pill" data-step="3"></div>
+        <div class="step-pill" data-step="4"></div>
+        <div class="step-pill" data-step="5"></div>
+        <div class="step-pill" data-step="6"></div>
+        <div class="step-pill" data-step="7"></div>
+      </div>
+
+      <!-- Music Pill -->
+      <div class="audio-pill" id="audio-pill" title="Toggle audio">
+        <div class="audio-bars">
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+        </div>
+        <span class="audio-tag" id="audio-tag">Play Song</span>
+      </div>
+    </header>
+
+    <!-- Interactive Screens Viewport -->
+    <main class="screens-viewport">
+
+      <!-- ==============================================
+           SCREEN 1: WELCOME & AUDIO INITIATION
+           ============================================== -->
+      <section class="screen active" id="screen-1" data-screen="1">
+        <div style="text-align: center; margin-top: 14px;">
+          <div class="meta-tag">For Ambivert</div>
+          <h1 class="headline-lg">A Dedicated <span class="gradient-text">Birthday</span> Moment</h1>
+          <p class="sub-copy">A quiet, thoughtful experience curated with genuine care by Usman.</p>
+        </div>
+
+        <div class="hero-center-stage">
+          <div class="monogram-orb" id="orb-trigger" title="Tap to begin">
+            <div class="orb-ring"></div>
+            <div class="orb-initials">A</div>
+          </div>
+          <div class="hero-meta-badge">✨ Tap the seal or button below to begin</div>
+        </div>
+
+        <button class="btn-clean-primary" id="btn-screen1-next">
+          <span>Begin Experience</span>
+          <span style="font-size: 16px;">→</span>
+        </button>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 2: ELEGANT BIRTHDAY GREETING
+           ============================================== -->
+      <section class="screen" id="screen-2" data-screen="2">
+        <div style="text-align: center; margin-top: 14px;">
+          <div class="meta-tag">The Celebration</div>
+          <h2 class="headline-lg">Happy Birthday, <span class="gradient-text">Ambivert</span></h2>
+          <p class="sub-copy">Today marks another year of your quiet grace, humor, and warmth.</p>
+        </div>
+
+        <div class="celebration-card-container">
+          <div class="clean-glass-card">
+            <div class="quote-mark">“</div>
+            <p class="card-body-text">
+              Some people bring noise, but true best friends bring peace, honest smiles, and an effortless sense of belonging wherever they are.
+            </p>
+            <div class="card-divider"></div>
+            <div class="card-signature">— Written for you by Usman</div>
+          </div>
+        </div>
+
+        <button class="btn-clean-primary" id="btn-screen2-next">
+          <span>Continue to The Wish</span>
+          <span style="font-size: 16px;">→</span>
+        </button>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 3: MINIMALIST CANDLE & WISH CEREMONY
+           ============================================== -->
+      <section class="screen" id="screen-3" data-screen="3">
+        <div style="text-align: center; margin-top: 14px;">
+          <div class="meta-tag">The Tradition</div>
+          <h2 class="headline-lg">Make a <span class="gradient-text">Silent Wish</span></h2>
+          <p class="sub-copy">Focus on what you hope this next chapter brings, then tap the candle.</p>
+        </div>
+
+        <div class="candle-experience-stage">
+          <div class="candle-pedestal" id="candle-trigger" title="Tap the candle to blow it out">
+            <!-- Candle Flame -->
+            <div class="candle-flame-wrapper">
+              <div class="flame-aura"></div>
+              <div class="flame-core"></div>
+            </div>
+
+            <!-- Smoke Trail (Rendered on extinguish) -->
+            <svg class="smoke-trail" viewBox="0 0 50 60" fill="none">
+              <path d="M25 50 Q20 35 28 20 Q35 10 24 2" stroke="rgba(255,255,255,0.4)" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+
+            <!-- Minimalist Candle & Pedestal SVG -->
+            <svg width="180" height="150" viewBox="0 0 180 150" fill="none">
+              <!-- Pedestal Stand -->
+              <ellipse cx="90" cy="138" rx="65" ry="8" fill="rgba(255,255,255,0.06)"/>
+              <path d="M45 136 C45 130 65 125 90 125 C115 125 135 130 135 136 L130 142 L50 142 Z" fill="rgba(255,255,255,0.08)"/>
+              
+              <!-- Candle Body -->
+              <rect x="85" y="55" width="10" height="72" rx="4" fill="url(#candle-grad)"/>
+              <!-- Wick -->
+              <line x1="90" y1="55" x2="90" y2="48" stroke="#cbd5e1" stroke-width="1.8"/>
+
+              <defs>
+                <linearGradient id="candle-grad" x1="85" y1="55" x2="95" y2="127" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#fff1f2"/>
+                  <stop offset="1" stop-color="#e2e8f0"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <div class="tap-to-blow-hint" id="blow-hint">
+            <span>✨</span>
+            <span>Tap the candle to blow out the flame</span>
+          </div>
+
+          <div class="wish-revealed-pill" id="wish-revealed-pill">
+            May every honest wish in your heart find its way to you this year.
+          </div>
+        </div>
+
+        <button class="btn-clean-primary" id="btn-screen3-next" style="display: none;">
+          <span>Read Bestie Reflections</span>
+          <span style="font-size: 16px;">→</span>
+        </button>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 4: BESTIE REFLECTIONS (CLEAN CARDS)
+           ============================================== -->
+      <section class="screen" id="screen-4" data-screen="4">
+        <div style="text-align: center; margin-top: 14px;">
+          <div class="meta-tag">The Bond</div>
+          <h2 class="headline-lg">What Makes You <span class="gradient-text">Rare</span></h2>
+          <p class="sub-copy">Four truths about our friendship from Usman's perspective.</p>
+        </div>
+
+        <div class="profile-cards-deck">
+          <div class="traits-stack">
+            <!-- Card 1 -->
+            <div class="trait-glass-card current" data-card="1">
+              <div class="card-num-tag">01 / DUALITY</div>
+              <h3 class="card-title-text">The Ambivert Balance</h3>
+              <p class="card-desc-text">
+                Completely content in serene personal space, yet seamlessly transitioning into uncontrollable laughter and animated discussions whenever we talk.
+              </p>
+            </div>
+            <!-- Card 2 -->
+            <div class="trait-glass-card" data-card="2">
+              <div class="card-num-tag">02 / AUTHENTICITY</div>
+              <h3 class="card-title-text">A Genuine Listener</h3>
+              <p class="card-desc-text">
+                In a world full of rush, you listen with sincerity. Your presence alone offers an understated calm that very few people possess.
+              </p>
+            </div>
+            <!-- Card 3 -->
+            <div class="trait-glass-card" data-card="3">
+              <div class="card-num-tag">03 / COMFORT</div>
+              <h3 class="card-title-text">Zero Pretense</h3>
+              <p class="card-desc-text">
+                We never have to perform or filter our thoughts. The inside jokes, shared perspectives, and silent mutual understanding make every conversation effortless.
+              </p>
+            </div>
+            <!-- Card 4 -->
+            <div class="trait-glass-card" data-card="4">
+              <div class="card-num-tag">04 / GRATITUDE</div>
+              <h3 class="card-title-text">A Lifelong Anchor</h3>
+              <p class="card-desc-text">
+                Knowing you are in my corner as a best friend is one of the greatest privileges. Thank you for simply being who you are.
+              </p>
+            </div>
+          </div>
+
+          <div class="traits-stepper-row">
+            <div class="traits-step-dot active" id="tdot-1"></div>
+            <div class="traits-step-dot" id="tdot-2"></div>
+            <div class="traits-step-dot" id="tdot-3"></div>
+            <div class="traits-step-dot" id="tdot-4"></div>
+          </div>
+        </div>
+
+        <button class="btn-clean-primary" id="btn-card-next">
+          <span id="card-btn-label">Next Reflection</span>
+          <span style="font-size: 16px;">→</span>
+        </button>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 5: HEARTFELT LETTER FROM USMAN
+           ============================================== -->
+      <section class="screen" id="screen-5" data-screen="5">
+        <div style="text-align: center; margin-top: 14px;">
+          <div class="meta-tag">Direct Words</div>
+          <h2 class="headline-lg">A Letter from <span class="gradient-text">Usman</span></h2>
+          <p class="sub-copy">Personal thoughts written especially for your birthday.</p>
+        </div>
+
+        <div class="letter-stage">
+          <div class="clean-envelope-box" id="envelope-trigger">
+            <div class="wax-seal-badge">U</div>
+            <h3 style="font-family: var(--font-display); font-size: 17px; font-weight: 600; color: #ffffff; margin-bottom: 4px;">For Ambivert</h3>
+            <p style="font-size: 12.5px; color: var(--text-secondary);">Tap to break seal and read letter</p>
+          </div>
+        </div>
+
+        <!-- Clean Letter Modal -->
+        <div class="clean-modal-overlay" id="letter-overlay">
+          <div class="letter-parchment">
+            <button class="btn-close-parchment" id="btn-close-letter" title="Close letter">✕</button>
+            <div class="letter-greeting">Dear Ambivert,</div>
+            <p class="letter-text">
+              Happy Birthday.
+            </p>
+            <p class="letter-text">
+              On your special day, I wanted to take a moment to express how grateful I am for our friendship. Having someone as thoughtful, understanding, and genuinely kind as you in my life is something I never take for granted.
+            </p>
+            <p class="letter-text">
+              Through the quiet days and the chaotic laughs, you have consistently been the best friend anyone could ever ask for. Your ambivert nature—peaceful, observant, and wonderfully humorous—is a gift to everyone fortunate enough to know you.
+            </p>
+            <p class="letter-text">
+              I hope this year rewards you with deep peace of mind, unshakeable confidence, and the achievement of all your private dreams.
+            </p>
+            <div class="letter-sign">
+              Always your best friend,<br>
+              <strong>Usman</strong>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-clean-primary" id="btn-screen5-next">
+          <span>Draw Birthday Wishes</span>
+          <span style="font-size: 16px;">→</span>
+        </button>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 6: STARRY WISH CAPSULE
+           ============================================== -->
+      <section class="screen" id="screen-6" data-screen="6">
+        <div style="text-align: center; margin-top: 14px;">
+          <div class="meta-tag">The Horizon</div>
+          <h2 class="headline-lg">Wishes for <span class="gradient-text">Your Year</span></h2>
+          <p class="sub-copy">A collection of meaningful blessings for the days ahead.</p>
+        </div>
+
+        <div class="wishes-stage">
+          <div class="wish-oracle-card">
+            <div class="oracle-icon">✦</div>
+            <div class="oracle-text-display" id="oracle-text">
+              "Tap the draw button below to reveal a blessing for your upcoming year."
+            </div>
+            <button class="btn-draw-wish" id="btn-draw-wish">
+              <span>✦ Draw Another Wish</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="btn-clean-primary" id="btn-screen6-next">
+          <span>The Closing Note</span>
+          <span style="font-size: 16px;">→</span>
+        </button>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 7: FINALE
+           ============================================== -->
+      <section class="screen" id="screen-7" data-screen="7">
+        <div style="text-align: center; margin-top: 14px;">
+          <div class="meta-tag">Honorary</div>
+          <h2 class="headline-lg">Celebrate <span class="gradient-text">Ambivert</span></h2>
+          <p class="sub-copy">May your year ahead be as inspiring as your presence.</p>
+        </div>
+
+        <div class="finale-layout">
+          <div class="finale-monogram" id="finale-monogram" title="Tap for stardust">
+            ✦
+          </div>
+
+          <div class="finale-info-card">
+            <p style="font-size: 14px; color: #f1f5f9; line-height: 1.6; font-weight: 500;">
+              "May this new chapter bring clarity to your goals, peace to your days, and joy to your soul."
+            </p>
+            <p style="font-size: 12px; color: var(--accent-rose); font-weight: 600; margin-top: 8px;">
+              — Best Friends Forever: Usman & Ambivert
+            </p>
+          </div>
+
+          <div class="actions-dual">
+            <button class="btn-secondary-clean" id="btn-burst-stars">
+              <span>✦ Stardust Shower</span>
+            </button>
+            <button class="btn-secondary-clean" id="btn-quick-hug">
+              <span>✉ Note of Thanks</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="btn-clean-primary" id="btn-replay">
+          <span>Replay Journey</span>
+          <span style="font-size: 16px;">↺</span>
+        </button>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Note of Thanks Modal -->
+  <div class="clean-modal-overlay" id="thanks-modal">
+    <div class="clean-glass-card" style="max-width: 320px; background: rgba(23, 19, 36, 0.95);">
+      <div style="font-size: 28px; margin-bottom: 8px; color: var(--accent-rose);">✦</div>
+      <h3 style="font-family: var(--font-display); font-size: 18px; color: #ffffff; margin-bottom: 8px;">A Toast to Friendship</h3>
+      <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+        "Here's to the unshakeable bond between two best friends, through every quiet chapter and every bright victory."
+      </p>
+      <button class="btn-clean-primary" style="padding: 10px 20px; font-size: 13.5px; width: auto; margin: 0 auto;" id="btn-close-thanks">
+        Appreciated ✦
+      </button>
+    </div>
+  </div>
+
+  <!-- Direct Streaming Audio Element -->
+  <audio id="bday-audio" preload="metadata" loop>
+    <source src="birthday_song.mp3" type="audio/mpeg">
+    <source src="जन्मदिन मुबारक.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    /* ===================================================
+       1. DIRECT AUDIO STREAMING (Instant 0ms Load)
+       =================================================== */
+    const audioElement = document.getElementById('bday-audio');
+    const audioPill = document.getElementById('audio-pill');
+    const audioTag = document.getElementById('audio-tag');
+
+    // Ensure audio source is set
+    if (!audioElement.src || audioElement.src === window.location.href) {
+      audioElement.src = "birthday_song.mp3";
+    }
+
+    let isPlaying = false;
+
+    function toggleSong() {
+      if (isPlaying) {
+        audioElement.pause();
+        isPlaying = false;
+        audioPill.classList.remove('playing');
+        audioTag.textContent = "Song Paused";
+      } else {
+        audioElement.play().then(() => {
+          isPlaying = true;
+          audioPill.classList.add('playing');
+          audioTag.textContent = "Playing";
+        }).catch(err => {
+          console.log("Autoplay waiting for interaction:", err);
+        });
+      }
+    }
+
+    audioPill.addEventListener('click', () => {
+      playTactileClick();
+      toggleSong();
+    });
+
+    function startSongOnAction() {
+      if (!isPlaying) {
+        audioElement.play().then(() => {
+          isPlaying = true;
+          audioPill.classList.add('playing');
+          audioTag.textContent = "Playing";
+        }).catch(err => {});
+      }
+    }
+
+    /* ===================================================
+       2. REFINED WEB AUDIO API SYNTHESIZER
+       =================================================== */
+    let audioCtx = null;
+    function getAudioCtx() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTactileClick() {
+      try {
+        const ctx = getAudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.05);
+      } catch(e) {}
+    }
+
+    function playSoftChime() {
+      try {
+        const ctx = getAudioCtx();
+        const freqs = [587.33, 880.00, 1174.66]; // D5, A5, D6 pure chime
+        freqs.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.07);
+          gain.gain.setValueAtTime(0.08, ctx.currentTime + idx * 0.07);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.07 + 0.4);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + idx * 0.07);
+          osc.stop(ctx.currentTime + idx * 0.07 + 0.42);
+        });
+      } catch(e) {}
+    }
+
+    function playExtinguishSound() {
+      try {
+        const ctx = getAudioCtx();
+        const bufferSize = ctx.sampleRate * 0.5;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(600, ctx.currentTime);
+        filter.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 0.45);
+        filter.Q.value = 3.0;
+
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0.02, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.15);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.48);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+        noise.start();
+        noise.stop(ctx.currentTime + 0.5);
+      } catch(e) {}
+    }
+
+    /* ===================================================
+       3. SCREEN NAVIGATION CONTROLLER
+       =================================================== */
+    let currentStep = 1;
+    const totalSteps = 7;
+
+    const screens = document.querySelectorAll('.screen');
+    const stepPills = document.querySelectorAll('.step-pill');
+    const btnBack = document.getElementById('btn-back');
+
+    function navigateTo(step) {
+      if (step < 1 || step > totalSteps) return;
+
+      playSoftChime();
+
+      screens.forEach(sc => {
+        const num = parseInt(sc.dataset.screen);
+        sc.classList.remove('active', 'prev');
+        if (num === step) {
+          sc.classList.add('active');
+        } else if (num < step) {
+          sc.classList.add('prev');
+        }
+      });
+
+      stepPills.forEach((pill, idx) => {
+        const pNum = idx + 1;
+        pill.classList.remove('active', 'passed');
+        if (pNum === step) {
+          pill.classList.add('active');
+        } else if (pNum < step) {
+          pill.classList.add('passed');
+        }
+      });
+
+      if (step > 1) {
+        btnBack.classList.remove('hidden');
+      } else {
+        btnBack.classList.add('hidden');
+      }
+
+      currentStep = step;
+
+      // Stardust particle emissions
+      if (step === 2 || step === 7) {
+        burstStardust(window.innerWidth / 2, window.innerHeight * 0.4, 40);
+      }
+    }
+
+    btnBack.addEventListener('click', () => {
+      playTactileClick();
+      if (currentStep > 1) {
+        navigateTo(currentStep - 1);
+      }
+    });
+
+    // Screen 1 triggers
+    document.getElementById('orb-trigger').addEventListener('click', () => {
+      startSongOnAction();
+      burstStardust(window.innerWidth / 2, window.innerHeight * 0.5, 30);
+      setTimeout(() => navigateTo(2), 250);
+    });
+
+    document.getElementById('btn-screen1-next').addEventListener('click', () => {
+      startSongOnAction();
+      burstStardust(window.innerWidth / 2, window.innerHeight * 0.5, 30);
+      navigateTo(2);
+    });
+
+    // Screen 2 triggers
+    document.getElementById('btn-screen2-next').addEventListener('click', () => {
+      navigateTo(3);
+    });
+
+    // Screen 3: Minimalist Candle Extinguish
+    const candleTrigger = document.getElementById('candle-trigger');
+    const blowHint = document.getElementById('blow-hint');
+    const wishRevealedPill = document.getElementById('wish-revealed-pill');
+    const btnScreen3Next = document.getElementById('btn-screen3-next');
+    let isBlown = false;
+
+    candleTrigger.addEventListener('click', () => {
+      if (isBlown) return;
+      isBlown = true;
+      playExtinguishSound();
+
+      candleTrigger.classList.add('blown');
+      blowHint.style.display = 'none';
+
+      const rect = candleTrigger.getBoundingClientRect();
+      burstStardust(rect.left + rect.width / 2, rect.top + 30, 45);
+
+      setTimeout(() => {
+        playSoftChime();
+        wishRevealedPill.classList.add('show');
+        btnScreen3Next.style.display = 'flex';
+      }, 500);
+    });
+
+    btnScreen3Next.addEventListener('click', () => {
+      navigateTo(4);
+    });
+
+    // Screen 4: Reflections Carousel
+    let activeCardIndex = 1;
+    const totalCards = 4;
+    const traitCards = document.querySelectorAll('.trait-glass-card');
+    const btnCardNext = document.getElementById('btn-card-next');
+    const cardBtnLabel = document.getElementById('card-btn-label');
+
+    btnCardNext.addEventListener('click', () => {
+      playTactileClick();
+      if (activeCardIndex < totalCards) {
+        activeCardIndex++;
+        updateReflectionCards();
+      } else {
+        navigateTo(5);
+      }
+    });
+
+    function updateReflectionCards() {
+      traitCards.forEach(card => {
+        const cNum = parseInt(card.dataset.card);
+        card.classList.remove('current');
+        if (cNum === activeCardIndex) {
+          card.classList.add('current');
+        }
+      });
+
+      for (let i = 1; i <= totalCards; i++) {
+        const dot = document.getElementById(`tdot-${i}`);
+        if (dot) {
+          if (i === activeCardIndex) dot.classList.add('active');
+          else dot.classList.remove('active');
+        }
+      }
+
+      if (activeCardIndex === totalCards) {
+        cardBtnLabel.textContent = "Open Usman's Letter";
+      } else {
+        cardBtnLabel.textContent = "Next Reflection";
+      }
+    }
+
+    // Screen 5: Letter Modal
+    const envelopeTrigger = document.getElementById('envelope-trigger');
+    const letterOverlay = document.getElementById('letter-overlay');
+    const btnCloseLetter = document.getElementById('btn-close-letter');
+    const btnScreen5Next = document.getElementById('btn-screen5-next');
+
+    envelopeTrigger.addEventListener('click', () => {
+      playSoftChime();
+      burstStardust(window.innerWidth / 2, window.innerHeight * 0.45, 25);
+      letterOverlay.classList.add('show');
+    });
+
+    btnCloseLetter.addEventListener('click', () => {
+      playTactileClick();
+      letterOverlay.classList.remove('show');
+    });
+
+    btnScreen5Next.addEventListener('click', () => {
+      navigateTo(6);
+    });
+
+    // Screen 6: Thoughtful Wishes Generator
+    const curatedWishes = [
+      "May you find quiet triumphs in every project you pour your mind into this year.",
+      "Wishing you steady peace, uncomplicated days, and deep personal fulfillment.",
+      "May your confidence rise to meet the tremendous depth of your potential.",
+      "Here's to genuine conversations, calm evenings, and laughter that lightens everything.",
+      "May the upcoming chapter grant you the courage to choose what truly aligns with your soul."
+    ];
+
+    const oracleText = document.getElementById('oracle-text');
+    const btnDrawWish = document.getElementById('btn-draw-wish');
+    let lastWishIdx = -1;
+
+    btnDrawWish.addEventListener('click', () => {
+      playTactileClick();
+      let nextIdx;
+      do {
+        nextIdx = Math.floor(Math.random() * curatedWishes.length);
+      } while (nextIdx === lastWishIdx);
+      lastWishIdx = nextIdx;
+
+      oracleText.style.opacity = '0';
+      oracleText.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        oracleText.textContent = `"${curatedWishes[nextIdx]}"`;
+        oracleText.style.opacity = '1';
+        oracleText.style.transform = 'scale(1)';
+        burstStardust(window.innerWidth / 2, window.innerHeight * 0.55, 20);
+      }, 200);
+    });
+
+    document.getElementById('btn-screen6-next').addEventListener('click', () => {
+      navigateTo(7);
+    });
+
+    // Screen 7: Finale Interactivity
+    const finaleMonogram = document.getElementById('finale-monogram');
+    finaleMonogram.addEventListener('click', (e) => {
+      playSoftChime();
+      burstStardust(e.clientX, e.clientY, 35);
+    });
+
+    document.getElementById('btn-burst-stars').addEventListener('click', () => {
+      playTactileClick();
+      burstStardust(window.innerWidth * 0.3, window.innerHeight * 0.4, 30);
+      burstStardust(window.innerWidth * 0.7, window.innerHeight * 0.4, 30);
+    });
+
+    const thanksModal = document.getElementById('thanks-modal');
+    document.getElementById('btn-quick-hug').addEventListener('click', () => {
+      playSoftChime();
+      thanksModal.classList.add('show');
+    });
+    document.getElementById('btn-close-thanks').addEventListener('click', () => {
+      playTactileClick();
+      thanksModal.classList.remove('show');
+    });
+
+    document.getElementById('btn-replay').addEventListener('click', () => {
+      playTactileClick();
+      // Reset state
+      isBlown = false;
+      candleTrigger.classList.remove('blown');
+      blowHint.style.display = 'inline-flex';
+      wishRevealedPill.classList.remove('show');
+      btnScreen3Next.style.display = 'none';
+
+      activeCardIndex = 1;
+      updateReflectionCards();
+
+      navigateTo(1);
+    });
+
+    /* ===================================================
+       4. TOUCH SPARKLE GENERATOR (CLEAN & SUBTLE)
+       =================================================== */
+    const appViewport = document.getElementById('app-viewport');
+    const touchIcons = ['✦', '✧', '•', '⋆'];
+
+    appViewport.addEventListener('click', (e) => {
+      if (e.target.closest('button') || e.target.closest('.audio-pill') || e.target.closest('#candle-trigger') || e.target.closest('#envelope-trigger')) {
+        return;
+      }
+      createTouchSparkle(e.clientX, e.clientY);
+    });
+
+    function createTouchSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'touch-sparkle';
+      sparkle.textContent = touchIcons[Math.floor(Math.random() * touchIcons.length)];
+      sparkle.style.color = Math.random() > 0.5 ? '#ff758f' : '#fbbf24';
+      sparkle.style.left = `${x}px`;
+      sparkle.style.top = `${y}px`;
+
+      const dx = (Math.random() - 0.5) * 60;
+      sparkle.style.setProperty('--dx', `${dx}px`);
+
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1400);
+    }
+
+    /* ===================================================
+       5. MINIMALIST STARDUST / SPARKLE PARTICLE ENGINE
+       =================================================== */
+    const canvas = document.getElementById('stardust-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const stardustPalette = ['#ffffff', '#ffb3c1', '#fbcfe8', '#fbbf24', '#c084fc'];
+
+    function handleResize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    class StardustParticle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.color = stardustPalette[Math.floor(Math.random() * stardustPalette.length)];
+        this.radius = Math.random() * 2.5 + 1;
+        this.vx = (Math.random() - 0.5) * 8;
+        this.vy = -(Math.random() * 8 + 3);
+        this.friction = 0.96;
+        this.gravity = 0.22;
+        this.alpha = 1;
+        this.decay = Math.random() * 0.015 + 0.01;
+      }
+
+      update() {
+        this.vx *= this.friction;
+        this.vy += this.gravity;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.alpha -= this.decay;
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.alpha);
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 6;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function burstStardust(x, y, count = 25) {
+      for (let i = 0; i < count; i++) {
+        particles.push(new StardustParticle(x, y));
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.update();
+        p.draw();
+        if (p.alpha <= 0 || p.y > canvas.height + 20) {
+          particles.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // Check URL parameters for direct screen preview (e.g., ?s=3)
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialScreen = parseInt(urlParams.get('s'));
+    if (initialScreen >= 1 && initialScreen <= totalSteps) {
+      navigateTo(initialScreen);
+    }
+  </script>
+</body>
+</html>

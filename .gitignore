@@ -1,0 +1,7 @@
+node_modules/
+*.png
+*.log
+serve.js
+build.js
+verify.js
+audio_base64.txt
